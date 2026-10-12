@@ -1,0 +1,6 @@
+Example of what to type at the drone_planner.py prompt (taken from the thesis, section 2.1):
+
+Hi, I have 5 locations, labeled a to e. c has 15 resources;
+The distances between the location are
+a to b is 3, b to c is 4 and all other edges are 1.
+I have one drone that can carry two resources. It's battery is current at 100%

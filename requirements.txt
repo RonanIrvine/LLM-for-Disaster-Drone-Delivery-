@@ -1,0 +1,15 @@
+# Core pipeline (drone_planner.py)
+openai>=1.0.0
+z3-solver>=4.13.0
+pydantic>=1.10,<2.0   # code uses pydantic v1-style `validator`
+
+# reference/dissertPythonTest.py (hand-written Z3 model + Auckland map) -- optional
+# numpy
+# matplotlib
+# networkx
+# cartopy
+# geopandas
+# shapely
+
+# legacy/llmscript.py (local CodeLlama prototype) -- optional
+# ctransformers>=0.2.27

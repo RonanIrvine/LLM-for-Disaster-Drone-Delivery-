@@ -1,0 +1,35 @@
+Constraints:
+- start_time[k,t] >= 0 for all k, t
+- arrival_time[k,t,i] >= 0 for all i, k, t
+- |start_time[k1,t] - start_time[k2,t]| >= {t_s} for k1 != k2, t
+- Implies(trip_active[k,t], sum_j X_delivery[k,t,source,j] = 1) for all k, t
+- If delivery_time[k1,t1,i] > 0 and delivery_time[k2,t2,i] > 0 then |delivery_time[k1,t1,i] - delivery_time[k2,t2,i]| >= {w} for all k1,k2,t1,t2,i in delivery_nodes (k1,t1) != (k2,t2)
+- Implies(X_delivery[k,t,source,j] = 1, arrival_time[k,t,j] = start_time[k,t] + t_{source,j}) for all k, t, j
+- Implies(X_delivery[k,t,i,j] = 1, arrival_time[k,t,j] = arrival_time[k,t,i] + t_{i,j} + {w}) for all k, t, i in delivery_nodes, j
+- sum_j X_delivery[k,t,i,j] = sum_j X_delivery[k,t,j,i] for all i, k, t
+- Implies(sum_j X_delivery[k,t,i,j] > 0, arrival_time[k,t,i] <= {t_max}) for all i, k, t
+- X_delivery[k,t,i,i] = 0 for all i, k, t
+- sum_{k,t} resources_delivered[k,t,i] = resources_required[i] for all i in delivery_nodes
+- energy_used[k] = sum_{t,i,j} If(X_delivery[k,t,i,j], edges[(i,j)]['distance'], 0) for all k
+- energy_used[k] <= drones[k]['energy'] for all k
+- sum_i resources_delivered[k,t,i] <= drones[k]['capacity'] for all k, t
+- load[k,source] = sum_{t,i in delivery_nodes} resources_delivered[k,t,i] for all k
+- load[k,i] = -sum_t resources_delivered[k,t,i] for all k, i in delivery_nodes
+- load[k,i] = 0 for all k, i not in {source, delivery_nodes}
+- sum_k load[k,source] <= resources_at[source]
+- If sum(resources_required[i] for i in delivery_nodes) > 0 then Or(trip_active[k,t] for k, t)
+- Implies(sum_i resources_delivered[k,t,i] = 0, And(Not(trip_active[k,t]), sum_{i,j} X_delivery[k,t,i,j] = 0)) for all k, t
+- start_time[k,t+1] >= start_time[k,t] + {t_s} for all k, t < max_trips-1
+- Implies(resources_delivered[k,t,i] > 0, delivery_time[k,t,i] = arrival_time[k,t,i]) for all k, t, i in delivery_nodes
+- Implies(resources_delivered[k,t,i] = 0, delivery_time[k,t,i] = 0) for all k, t, i in delivery_nodes
+- Implies(trip_active[k,t], sum_i visited_nodes[k,t,i] = sum_{i,j} If(X_delivery[k,t,i,j], 1, 0)) for all k, t
+- Implies(visited_nodes[k,t,i], Or(And(X_delivery[k,t,i,j], successor[k,t,i] = node_indices[j]) for j where (i,j) in edges)) for all k, t, i != source
+- Implies(trip_active[k,t], Or(And(X_delivery[k,t,source,j], successor[k,t,source] = node_indices[j]) for j where (source,j) in edges)) for all k, t
+- Implies(Not(visited_nodes[k,t,i]), successor[k,t,i] = -1) for all k, t, i
+- Implies(trip_active[k,t], sum_i resources_delivered[k,t,i] > 0) for all k, t
+- Implies(trip_active[k,t], sum_{i in delivery_nodes} visited_nodes[k,t,i] >= 1) for all k, t
+- Implies(trip_active[k,t], sum_j If(X_delivery[k,t,j,source], 1, 0) = 1) for all k, t
+- resources_delivered[k,t,i] >= 0 for all k, t, i in delivery_nodes
+- Implies(trip_active[k,t], start_time[k,t+1] >= arrival_time[k,t,source]) for all k, t < max_trips-1
+- Minimize sum_k energy_used[k]
+- Then minimize sum_{k,t} trip_active[k,t]

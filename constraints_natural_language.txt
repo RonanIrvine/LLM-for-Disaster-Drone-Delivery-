@@ -1,0 +1,35 @@
+Constraints:
+- Each drone trip must start at or after time zero.
+- The arrival time at any node must always be non-negative.
+- The starting times of two drones on the same trip must differ with a start time gap t_s.
+- Each trip must begin with exactly one outgoing route from the source location.
+- Deliveries made by different drones to the same location must be separated by at least the required waiting interval w (service time).
+- When a drone travels directly from the source to another location, its arrival time must equal its start time plus the travel duration.
+- When a drone travels between two delivery locations, its arrival time must equal the previous arrival time plus travel time and any waiting time (w).
+- For every node, the number of incoming routes must equal the number of outgoing routes.
+- Each visited node must have an arrival time less than or equal to the maximum allowed time t_max.
+- A drone cannot travel from a node back to the same node.
+- The total amount of resources delivered to each destination must exactly match that destination's demand.
+- The total resources a drone delivers on a trip cannot exceed its carrying capacity.
+- The total resources loaded at the source must equal the sum of all resources that will be delivered.
+- Delivery nodes have negative loads equal to the amount they receive.
+- Load is zero for every drone at any node that is neither the source nor a delivery node.
+- The total amount of resources dispatched from the source cannot exceed what is available there.
+- Every delivery quantity must be nonnegative.
+- A trip must be active if there are outstanding delivery requirements.
+- If no resources are delivered during a trip, that trip must be inactive and make no movements.
+- Each trip must start after the previous one by at least the specified time gap.
+- If a delivery occurs at a node, the delivery time must equal the arrival time.
+- If no delivery occurs, the delivery time must be zero.
+- When a trip is active, the number of visited nodes must match the number of edges traversed.
+- If a node is visited, its successor must correspond to an actual delivery edge (i to j) that the UAV travels.
+- If the trip is active, the source node must also have a valid successor along a delivery edge (source to j).
+- If a node is not visited, it must not have a successor (value = -1).
+- If a trip is active, it must visit at least one delivery location.
+- If a trip is active, it must deliver at least one resource.
+- The next trip must begin only after the previous trip has returned to the source.
+- Every active trip must end by returning once to the source node.
+- The total energy used by a drone equals the sum of all distances based on its chosen routes.
+- The total energy used by a drone must not exceed its available energy.
+- Minimize the total energy used by all drones.
+- Then minimize the number of active trips.

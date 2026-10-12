@@ -1,0 +1,89 @@
+{
+  "nodes": [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e"
+  ],
+  "edges": [
+    {
+      "from": "a",
+      "to": "b",
+      "weight": 8
+    },
+    {
+      "from": "a",
+      "to": "c",
+      "weight": 4
+    },
+    {
+      "from": "b",
+      "to": "e",
+      "weight": 3
+    },
+    {
+      "from": "e",
+      "to": "d",
+      "weight": 2
+    },
+    {
+      "from": "c",
+      "to": "d",
+      "weight": 10
+    },
+    {
+      "from": "b",
+      "to": "a",
+      "weight": 8
+    },
+    {
+      "from": "c",
+      "to": "a",
+      "weight": 4
+    },
+    {
+      "from": "e",
+      "to": "b",
+      "weight": 3
+    },
+    {
+      "from": "d",
+      "to": "e",
+      "weight": 2
+    },
+    {
+      "from": "d",
+      "to": "c",
+      "weight": 10
+    }
+  ],
+  "resources_at": {
+    "a": 15,
+    "b": 0,
+    "c": 0,
+    "d": 0,
+    "e": 0
+  },
+  "resources_required": {
+    "d": 15
+  },
+  "drones": {
+    "d1": {
+      "capacity": 2,
+      "energy": 200
+    },
+    "d2": {
+      "capacity": 1,
+      "energy": 300
+    }
+  },
+  "timing": {
+    "takeoff": 3,
+    "landing": 5,
+    "travel": 10,
+    "service": 0,
+    "t_max": 1000
+  },
+  "max_trips": 15
+}
